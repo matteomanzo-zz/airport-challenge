@@ -15,9 +15,9 @@ CRC
 
 Responsabilities  |  Collaborators
 ------------------|---------------
-	to take off   |	   Airport
-	to fly        |
-	to land       |    Airport
+    to take off   |    Airport
+    to fly        |
+    to land       |    Airport
 ----------------------------------
 
 #Airport
