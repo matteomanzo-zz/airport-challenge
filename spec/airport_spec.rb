@@ -11,11 +11,13 @@ require 'planes'
 describe Airport do
 
   let(:airport) { Airport.new }
+  let(:plane) {Planes.new}
 
   context 'taking off and landing' do
 
     it 'a plane can land' do
-
+      plane.land!
+      expect(airport.planes_count).to eq(1)
     end
 
     it 'a plane can take off' do
