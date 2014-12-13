@@ -22,7 +22,11 @@ describe Airport do
     end
 
     it 'a plane can take off' do
-
+      plane.land!
+      airport.dock(plane)
+      plane.take_off!
+      airport.release(plane)
+      expect(airport.planes_count).to eq(0)
     end
   end
 
