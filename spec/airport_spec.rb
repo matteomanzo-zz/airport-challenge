@@ -33,7 +33,9 @@ describe Airport do
   context 'traffic control' do
 
     it 'a plane cannot land if the airport is full' do
-
+      plane.land!
+      10.times {airport.dock(plane)}
+      expect(lambda { airport.dock(plane) }).to raise_error(RuntimeError, 'Airport is full!')
     end
 
     # Include a weather condition using a module.
