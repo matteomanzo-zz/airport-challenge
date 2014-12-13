@@ -23,6 +23,11 @@ describe Planes do
     expect(plane.status).to eq 'flying'
   end
 
+  it 'can land' do
+    plane.land!
+    expect(plane.status).to eq 'landed'
+  end
+
   it 'changes its status to flying after taking of' do
 
   end
