@@ -20,4 +20,10 @@ class Airport
   def planes_count
     @planes.count
   end
+
+  def release(plane)
+    if plane.status == 'flying'
+      @planes.delete(plane)
+    end
+  end
 end
