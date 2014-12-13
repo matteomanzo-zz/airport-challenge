@@ -6,4 +6,8 @@ class Planes
   def status
     @status
   end
+
+  def take_off!
+    @status = 'flying'
+  end
 end
