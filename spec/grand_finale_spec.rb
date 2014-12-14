@@ -6,13 +6,27 @@
 
 require './lib/airport.rb'
 require './lib/planes.rb'
+require './lib/weather.rb'
 
 describe "The grand finale (last spec)" do
 
   let(:airport) { Airport.new }
-
+  let(:planes) { Array.new([ Planes.new, Planes.new, Planes.new, Planes.new, Planes.new, Planes.new])}
+  
   it 'all planes can land' do
-    expect(planes.status).to eq 'landed'
-    end
-   
+    allow(airport).to receive(:weather_condition).and_return('sunny')
+    allow(planes.each {|plane| plane}).to receive(:weather_condition).and_return('sunny')
+    planes.each {|plane| plane.land!}
+    expect(planes.each {|plane| plane.status}).to eq('landed')
+  end
+
+  it 'airport should be full' do
+    allow(airport).to receive(:weather_condition).and_return('sunny')
+    allow(planes.each {|plane| plane}).to receive(:weather_condition).and_return('sunny')
+    planes.each {|plane| plane.land!}
+    planes.each {|plane| airport.dock(plane)}
+    expect(airport).to be_full
+  end
+
+
 end
