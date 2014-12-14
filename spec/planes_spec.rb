@@ -14,10 +14,6 @@ describe Planes do
 #
 # When the plane takes of from the airport, the plane's status should become "flying"
 
-  it 'has a flying status when in the air' do
-
-  end
-
   it 'can take off' do
     allow(plane).to receive(:weather_condition).and_return('sunny')
     expect(plane.status).to eq 'flying'

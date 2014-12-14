@@ -40,7 +40,7 @@ describe Airport do
       allow(plane).to receive(:weather_condition).and_return('sunny')
       allow(airport).to receive(:weather_condition).and_return('sunny')
       plane.land!
-      10.times {airport.dock(plane)}
+      6.times {airport.dock(plane)}
       expect(lambda { airport.dock(plane) }).to raise_error(RuntimeError, 'Airport is full!')
     end
 

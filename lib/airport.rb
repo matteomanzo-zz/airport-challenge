@@ -5,7 +5,7 @@ class Airport
   
   include Weather
 
-  DEFAULT_CAPACITY = 10
+  DEFAULT_CAPACITY = 6
 
   def initialize(capacity = DEFAULT_CAPACITY)
     @capacity = capacity
