@@ -19,16 +19,18 @@ describe Planes do
   end
 
   it 'can take off' do
-    plane.take_off!
+    allow(plane).to receive(:weather_condition).and_return('sunny')
     expect(plane.status).to eq 'flying'
   end
 
   it 'can land' do
+    allow(plane).to receive(:weather_condition).and_return('sunny')
     plane.land!
     expect(plane.status).to eq 'landed'
   end
 
   it 'changes its status to flying after taking of' do
+    allow(plane).to receive(:weather_condition).and_return('sunny')
     plane.land!
     plane.take_off!
     expect(plane.status).to eq 'flying'

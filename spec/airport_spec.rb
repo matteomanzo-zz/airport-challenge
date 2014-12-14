@@ -16,13 +16,16 @@ describe Airport do
   context 'taking off and landing' do
 
     it 'a plane can land' do
-      
+      allow(plane).to receive(:weather_condition).and_return('sunny')
+      allow(airport).to receive(:weather_condition).and_return('sunny')
       plane.land!
       airport.dock(plane)
       expect(airport.planes_count).to eq(1)
     end
 
     it 'a plane can take off' do
+      allow(plane).to receive(:weather_condition).and_return('sunny')
+      allow(airport).to receive(:weather_condition).and_return('sunny')
       plane.land!
       airport.dock(plane)
       plane.take_off!
@@ -34,6 +37,8 @@ describe Airport do
   context 'traffic control' do
 
     it 'a plane cannot land if the airport is full' do
+      allow(plane).to receive(:weather_condition).and_return('sunny')
+      allow(airport).to receive(:weather_condition).and_return('sunny')
       plane.land!
       10.times {airport.dock(plane)}
       expect(lambda { airport.dock(plane) }).to raise_error(RuntimeError, 'Airport is full!')
