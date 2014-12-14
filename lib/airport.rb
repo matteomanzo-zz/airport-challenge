@@ -1,7 +1,10 @@
-require_relative 'planes.rb' 
+require './lib/planes.rb' 
+require './lib/weather.rb'
 
 class Airport
   
+  include Weather
+
   DEFAULT_CAPACITY = 10
 
   def initialize(capacity = DEFAULT_CAPACITY)
@@ -10,6 +13,7 @@ class Airport
   end
 
   def dock(plane)
+    raise 'You cannot land if it\'s stormy' if weather_condition == 'stormy'
     raise 'Airport is full!' if full?
     if plane.status == 'landed'
       @planes << plane
@@ -23,6 +27,7 @@ class Airport
   end
 
   def release(plane)
+    raise 'You cannot take off if it\'s stormy' if weather_condition == 'stormy'
     if plane.status == 'flying'
       @planes.delete(plane)
     end
