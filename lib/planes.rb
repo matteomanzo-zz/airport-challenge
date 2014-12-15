@@ -1,6 +1,6 @@
 require './lib/weather'
 
-class Planes
+class Plane
 
   include Weather
 

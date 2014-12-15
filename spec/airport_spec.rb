@@ -11,7 +11,7 @@ require './lib/planes.rb'
 describe Airport do
 
   let(:airport) { Airport.new }
-  let(:plane) { Planes.new }
+  let(:plane) { Plane.new }
 
   context 'taking off and landing' do
 

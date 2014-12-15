@@ -11,37 +11,36 @@ require './lib/weather.rb'
 describe "The grand finale (last spec)" do
 
   let(:airport) { Airport.new }
-  let(:planes) { Array.new([ Planes.new, Planes.new, Planes.new, Planes.new, Planes.new, Planes.new])}
-  
-  it 'all planes can land' do
+  let(:planes) { 6.times.collect{Plane.new} }
+
+  before do
     allow(airport).to receive(:weather_condition).and_return('sunny')
     allow(planes.each {|plane| plane}).to receive(:weather_condition).and_return('sunny')
-    planes.each {|plane| plane.land!}
-    expect(planes.each {|plane| plane.status}).to eq('landed')
+  
+  end
+
+  
+  it 'all planes can land' do
+    planes.map(&:land!)
+    expect(planes.map(&:status)).to eq(6.times.collect{'landed'})
   end
 
   it 'airport should be full' do
-    allow(airport).to receive(:weather_condition).and_return('sunny')
-    allow(planes.each {|plane| plane}).to receive(:weather_condition).and_return('sunny')
-    planes.each {|plane| plane.land!}
+    planes.map(&:land!)
     planes.each {|plane| airport.dock(plane)}
     expect(airport).to be_full
   end
 
   it 'all planes can take_off' do
-    allow(airport).to receive(:weather_condition).and_return('sunny')
-    allow(planes.each {|plane| plane}).to receive(:weather_condition).and_return('sunny')
-    planes.each {|plane| plane.land!}
+    planes.map(&:land!)
     planes.each {|plane| airport.dock(plane)}
     planes.each {|plane| plane.take_off!}
     planes.each {|plane| airport.release(plane)}
-    expect(planes.each {|plane| plane.status}).to eq('flying')
+    expect(planes.map(&:status)).to eq(6.times.collect{'flying'})
   end
 
   it 'airport should be empty' do
-    allow(airport).to receive(:weather_condition).and_return('sunny')
-    allow(planes.each {|plane| plane}).to receive(:weather_condition).and_return('sunny')
-    planes.each {|plane| plane.land!}
+    planes.map(&:land!)
     planes.each {|plane| airport.dock(plane)}
     planes.each {|plane| plane.take_off!}
     planes.each {|plane| airport.release(plane)}

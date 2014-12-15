@@ -1,8 +1,8 @@
 require 'planes'
 
-describe Planes do
+describe Plane do
 
-  let(:plane) { Planes.new }
+  let(:plane) { Plane.new }
 
   it 'should have a flying status when created' do
     expect(plane.status).to eq 'flying'
