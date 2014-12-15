@@ -18,6 +18,7 @@ describe Plane do
     end
 
     it 'can take off' do
+      plane.take_off!
       expect(plane.status).to eq 'flying'
     end
 

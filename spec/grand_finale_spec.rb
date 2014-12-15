@@ -20,7 +20,6 @@ describe "The grand finale (last spec)" do
     planes.each do |plane|
       allow(plane).to receive(:weather_condition).and_return('sunny')
     end
-  
   end
 
   
@@ -50,5 +49,4 @@ describe "The grand finale (last spec)" do
     planes.each {|plane| airport.release(plane)}
     expect(airport.planes).to be_empty
   end
-
 end
