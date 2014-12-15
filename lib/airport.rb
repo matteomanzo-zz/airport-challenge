@@ -15,9 +15,10 @@ class Airport
   end
 
   def dock(plane)
-    raise 'You cannot allow landing in the middle of the storm!!' if weather_condition == 'stormy'
+    raise 'You cannot allow landing in the middle of the storm!!' if stormy?
     raise 'Airport is full!' if full?
-    plane.status == 'landed' ? @planes << plane : 'No planes have landed'
+    plane.land!
+    @planes << plane
   end
 
   def planes_count
@@ -25,9 +26,10 @@ class Airport
   end
 
   def release(plane)
-    raise 'You cannot allow taking off in the middle of the storm!!' if weather_condition == 'stormy'
-    @planes.delete(plane) if plane.status == 'flying' 
-  end
+    raise 'You cannot allow taking off in the middle of the storm!!' if stormy?
+    plane.take_off!
+    @planes.delete(plane) if @planes.include?(plane)
+  end 
 
   def full?
     planes_count == @capacity

@@ -1,25 +1,20 @@
-require './lib/weather'
-
 class Plane
 
-  include Weather
-
+  attr_reader :flying
 
   def initialize
-    @status = 'flying'
-  end
-
-  def status
-    @status
+    @flying = true
   end
 
   def take_off!
-    raise 'You cannot take off in the middle of the storm!!' if weather_condition == 'stormy'
-    @status = 'flying'
+    @flying = true
   end
 
   def land!
-    raise 'You cannot land in the middle of the storm!!' if weather_condition == 'stormy'
-    @status = 'landed'
+    @flying = false
+  end
+
+  def is_flying?
+    @flying
   end
 end

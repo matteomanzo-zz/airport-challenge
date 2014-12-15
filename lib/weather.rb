@@ -1,7 +1,7 @@
 module Weather
 
-  def weather_condition
-    rand(1..101) >= 80 ? 'stormy' : 'sunny'
+  def stormy?
+    rand(1..101) >= 80
   end
 
 end

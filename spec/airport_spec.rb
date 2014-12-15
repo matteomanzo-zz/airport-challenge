@@ -14,19 +14,15 @@ describe Airport do
 
   context 'taking off and landing' do
 
-    before {allow(airport).to receive(:weather_condition).and_return('sunny')}
-    before {allow(plane).to receive(:weather_condition).and_return('sunny')}
+    before {allow(airport).to receive(:stormy?).and_return(false)}
 
     it 'a plane can land' do
-      plane.land!
       airport.dock(plane)
       expect(airport.planes_count).to eq(1)
     end
 
     it 'a plane can take off' do
-      plane.land!
       airport.dock(plane)
-      plane.take_off!
       airport.release(plane)
       expect(airport.planes_count).to eq(0)
     end
@@ -34,8 +30,8 @@ describe Airport do
 
   context 'traffic control' do
 
-    before {allow(airport).to receive(:weather_condition).and_return('sunny')}
-    before {allow(plane).to receive(:weather_condition).and_return('sunny')}
+    before {allow(airport).to receive(:stormy?).and_return(false)}
+    before {allow(plane).to receive(:stormy?).and_return(false)}
 
     it 'a plane cannot land if the airport is full' do
       plane.land!
@@ -53,7 +49,7 @@ describe Airport do
 
     context 'weather conditions' do
 
-      before {allow(airport).to receive(:weather_condition).and_return('stormy')}
+      before {allow(airport).to receive(:stormy?).and_return(true)}
 
       it 'airport cannot allow taking off when there is a storm brewing' do
         expect(lambda { airport.release(plane) }).to raise_error(RuntimeError, 'You cannot allow taking off in the middle of the storm!!')

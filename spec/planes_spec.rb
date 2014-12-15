@@ -9,41 +9,23 @@ describe Plane do
 
   let(:plane) { Plane.new }
 
-  context 'clear weather' do
-
-    before {allow(plane).to receive(:weather_condition).and_return('sunny')}
-
     it 'should have a flying status when created' do
-      expect(plane.status).to eq 'flying'
+      expect(plane.is_flying?).to eq true
     end
 
     it 'can take off' do
       plane.take_off!
-      expect(plane.status).to eq 'flying'
+      expect(plane.is_flying?).to eq true
     end
 
     it 'can land' do
       plane.land!
-      expect(plane.status).to eq 'landed'
+      expect(plane.is_flying?).to eq false
     end
 
     it 'changes its status to flying after taking of' do
       plane.land!
       plane.take_off!
-      expect(plane.status).to eq 'flying'
+      expect(plane.is_flying?).to eq true
     end
-  end
-
-  context 'storm!!' do
-
-    before {allow(plane).to receive(:weather_condition).and_return('stormy')}
-
-    it 'a plane cannot land in the middle of a storm' do
-      expect( lambda {plane.land!} ).to raise_error(RuntimeError, 'You cannot land in the middle of the storm!!')
-    end
-
-    it 'a plane cannot take off in the middle of a storm' do
-      expect( lambda {plane.take_off!} ).to raise_error(RuntimeError, 'You cannot take off in the middle of the storm!!')
-    end
-  end
 end
