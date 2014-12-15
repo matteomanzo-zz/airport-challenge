@@ -1,12 +1,11 @@
-require './lib/airport.rb'
-require './lib/planes.rb'
 
 # A plane currently in the airport can be requested to take off.
-#
 # No more planes can be added to the airport, if it's full.
 # It is up to you how many planes can land in the airport and how that is impermented.
-#
 # If the airport is full then no planes can land
+
+require './lib/airport.rb'
+require './lib/planes.rb'
 
 describe Airport do
 
@@ -15,17 +14,16 @@ describe Airport do
 
   context 'taking off and landing' do
 
+    before {allow(airport).to receive(:weather_condition).and_return('sunny')}
+    before {allow(plane).to receive(:weather_condition).and_return('sunny')}
+
     it 'a plane can land' do
-      allow(plane).to receive(:weather_condition).and_return('sunny')
-      allow(airport).to receive(:weather_condition).and_return('sunny')
       plane.land!
       airport.dock(plane)
       expect(airport.planes_count).to eq(1)
     end
 
     it 'a plane can take off' do
-      allow(plane).to receive(:weather_condition).and_return('sunny')
-      allow(airport).to receive(:weather_condition).and_return('sunny')
       plane.land!
       airport.dock(plane)
       plane.take_off!
@@ -36,9 +34,10 @@ describe Airport do
 
   context 'traffic control' do
 
+    before {allow(airport).to receive(:weather_condition).and_return('sunny')}
+    before {allow(plane).to receive(:weather_condition).and_return('sunny')}
+
     it 'a plane cannot land if the airport is full' do
-      allow(plane).to receive(:weather_condition).and_return('sunny')
-      allow(airport).to receive(:weather_condition).and_return('sunny')
       plane.land!
       6.times {airport.dock(plane)}
       expect(lambda { airport.dock(plane) }).to raise_error(RuntimeError, 'Airport is full!')
@@ -54,14 +53,14 @@ describe Airport do
 
     context 'weather conditions' do
 
-      it 'a plane cannot take off when there is a storm brewing' do
-        allow(airport).to receive(:weather_condition).and_return('stormy')
-        expect(lambda { airport.release(plane) }).to raise_error(RuntimeError, 'You cannot take off if it\'s stormy')
+      before {allow(airport).to receive(:weather_condition).and_return('stormy')}
+
+      it 'airport cannot allow taking off when there is a storm brewing' do
+        expect(lambda { airport.release(plane) }).to raise_error(RuntimeError, 'You cannot allow taking off in the middle of the storm!!')
       end
 
-      it 'a plane cannot land in the middle of a storm' do
-        allow(airport).to receive(:weather_condition).and_return('stormy')
-        expect(lambda { airport.dock(plane) }).to raise_error(RuntimeError, 'You cannot land if it\'s stormy')
+      it 'airport cannot allow landing in the middle of a storm' do
+        expect(lambda { airport.dock(plane) }).to raise_error(RuntimeError, 'You cannot allow landing in the middle of the storm!!')
       end
     end
   end

@@ -14,12 +14,12 @@ class Plane
   end
 
   def take_off!
-    raise 'You cannot take off if it\'s stormy' if weather_condition == 'stormy'
+    raise 'You cannot take off in the middle of the storm!!' if weather_condition == 'stormy'
     @status = 'flying'
   end
 
   def land!
-    raise 'You cannot land if it\'s stormy' if weather_condition == 'stormy'
+    raise 'You cannot land in the middle of the storm!!' if weather_condition == 'stormy'
     @status = 'landed'
   end
 end
