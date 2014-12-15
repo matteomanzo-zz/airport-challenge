@@ -15,7 +15,10 @@ describe "The grand finale (last spec)" do
 
   before do
     allow(airport).to receive(:weather_condition).and_return('sunny')
-    allow(planes.each {|plane| plane}).to receive(:weather_condition).and_return('sunny')
+    
+    planes.each do |plane|
+      allow(plane).to receive(:weather_condition).and_return('sunny')
+    end
   
   end
 
@@ -34,7 +37,7 @@ describe "The grand finale (last spec)" do
   it 'all planes can take_off' do
     planes.map(&:land!)
     planes.each {|plane| airport.dock(plane)}
-    planes.each {|plane| plane.take_off!}
+    planes.map(&:take_off!)
     planes.each {|plane| airport.release(plane)}
     expect(planes.map(&:status)).to eq(6.times.collect{'flying'})
   end
@@ -42,7 +45,7 @@ describe "The grand finale (last spec)" do
   it 'airport should be empty' do
     planes.map(&:land!)
     planes.each {|plane| airport.dock(plane)}
-    planes.each {|plane| plane.take_off!}
+    planes.map(&:take_off!)
     planes.each {|plane| airport.release(plane)}
     expect(airport.planes).to be_empty
   end
