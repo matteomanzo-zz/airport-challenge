@@ -21,7 +21,7 @@ describe "The grand finale (last spec)" do
   
   it 'all planes can land' do
     planes.map(&:land!)
-    expect(planes.map(&:flying)).to eq(6.times.collect{false})
+    expect(planes.map(&:is_flying?)).to eq(6.times.collect{false})
   end
 
   it 'airport should be full' do
@@ -32,7 +32,7 @@ describe "The grand finale (last spec)" do
   it 'all planes can take_off' do
     planes.each {|plane| airport.dock(plane)}
     planes.each {|plane| airport.release(plane)}
-    expect(planes.map(&:flying)).to eq(6.times.collect{true})
+    expect(planes.map(&:is_flying?)).to eq(6.times.collect{true})
   end
 
   it 'airport should be empty' do
