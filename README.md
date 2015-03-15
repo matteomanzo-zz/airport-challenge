@@ -1,6 +1,8 @@
 Airport Challenge
 =================
 
+![airport](airport.jpg)
+
 Tasks
 -----
 
@@ -26,7 +28,7 @@ Responsabilities  |  Collaborators
 ------------------|---------------
   Release Planes  |	   Planes
   Dock Planes     |	   Planes
-  Be full         |      
+  Be full         |
   Be empty        |
 ----------------------------------
 
@@ -39,4 +41,3 @@ Responsabilities  |  Collaborators
   Allows landing  | Airport, Planes
   Deny landing    | Airport, Planes
 -----------------------------------
-	
